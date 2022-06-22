@@ -18,10 +18,6 @@ PURPOSE: Create the function get_pet_labels that creates the pet labels from
 # Imports python modules
 from os import listdir
 
-# TODO 2: Define get_pet_labels function below please be certain to replace None
-#       in the return statement with results_dic dictionary that you create 
-#       with this function
-# 
 def get_pet_labels(image_dir):
     """
     Creates a dictionary of pet labels (results_dic) based upon the filenames 
@@ -39,6 +35,20 @@ def get_pet_labels(image_dir):
       List. The list contains for following item:
          index 0 = pet image label (string)
     """
-    # Replace None with the results_dic dictionary that you created with this
-    # function
-    return None
+    results_dic = {}
+    f_list = listdir(image_dir)
+    for f_name in f_list:
+        f_split = f_name.split('_')
+        f_split.pop()
+        label = ' '.join(f_split).lower()
+        if f_name not in results_dic:
+            label_list = [label]
+            results_dic.update({f_name: label_list})
+        else:
+            print(f'Warning: key {f_name} already exists in results_dic.')
+    # print(results_dic)
+
+    return results_dic
+
+if __name__ == '__main__':
+    get_pet_labels('pet_images/')   
