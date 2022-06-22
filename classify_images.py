@@ -84,3 +84,4 @@ if __name__ == '__main__':
                    }
 
     classify_images('pet_images/', results_dic, 'vgg')
+    print(results_dic)
