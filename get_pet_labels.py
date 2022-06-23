@@ -41,6 +41,9 @@ def get_pet_labels(image_dir):
     results_dic = {}
     f_list = listdir(image_dir)
     for f_name in f_list:
+        if f_name.startswith('.'):
+            # skip hidden files
+            continue
         f_split = f_name.split('_')
         f_split.pop()
         label = ' '.join(f_split).lower()
@@ -53,4 +56,4 @@ def get_pet_labels(image_dir):
 
 
 if __name__ == '__main__':
-    get_pet_labels('pet_images/')
+    print(get_pet_labels('pet_images/'))

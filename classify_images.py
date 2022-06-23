@@ -64,7 +64,8 @@ def classify_images(images_dir, results_dic, model):
     """
     for key, value in results_dic.items():
         path = images_dir + key
-        img_class = classifier(path, model).lower()
+        # added strip() for potential whitespace
+        img_class = classifier(path, model).lower().strip()
         value.insert(1, img_class)
         if img_class.find(value[0]) > -1:
             value.insert(2, 1)
