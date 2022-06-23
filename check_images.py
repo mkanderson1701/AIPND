@@ -22,7 +22,7 @@ Use argparse Expected Call with <> indicating expected user input:
 """
 
 # Imports python modules
-from time import time, sleep
+from time import time, sleep, strftime
 
 # Imports print functions that check the lab
 from print_functions_for_lab_checks import *
@@ -34,11 +34,13 @@ from classify_images import classify_images
 from adjust_results4_isadog import adjust_results4_isadog
 from calculates_results_stats import calculates_results_stats
 from print_results import print_results
+from timeit import default_timer as timer
 
 
 def main():
     # Measures total program runtime by collecting start time
     start_time = time()
+    start_timeit = timer()
 
     # command line parser
     in_arg = get_input_args()
@@ -54,18 +56,12 @@ def main():
     # Run classication
     classify_images(in_arg.dir, results_dic, in_arg.arch)
 
-    # Function that checks Results Dictionary using results    
-    check_classifying_images(results_dic)    
+    # Function that checks Results Dictionary using results
+    check_classifying_images(results_dic)
 
-    # TODO 4: Define adjust_results4_isadog function within the file adjust_results4_isadog.py
-    # Once the adjust_results4_isadog function has been defined replace 'None' 
-    # in the function call with in_arg.dogfile  Once you have done the 
-    # replacements your function call should look like this: 
-    #          adjust_results4_isadog(results, in_arg.dogfile)
-    # Adjusts the results dictionary to determine if classifier correctly 
-    # classified images as 'a dog' or 'not a dog'. This demonstrates if 
-    # model can correctly classify dog images as dogs (regardless of breed)
-    adjust_results4_isadog(results_dic, None)
+    # Update dict with additional flags for is/is not dog
+    adjust_results4_isadog(results_dic, in_arg.dogfile)
+    # print(results_dic)
 
     # Function that checks Results Dictionary for is-a-dog adjustment using results
     check_classifying_labels_as_dogs(results_dic)
@@ -89,16 +85,18 @@ def main():
     #      print_results(results, results_stats, in_arg.arch, True, True)
     # Prints summary results, incorrect classifications of dogs (if requested)
     # and incorrectly classified breeds (if requested)
-    print_results(results_dic, results_stats, None, True, True)
+    print_results(results_dic, results_stats, in_arg.arch, True, True)
     
     # TODO 0: Measure total program runtime by collecting end time
+    end_timeit = timer()
     end_time = time()
     
     # TODO 0: Computes overall runtime in seconds & prints it in hh:mm:ss format
     tot_time = end_time - start_time
-    print("\n** Total Elapsed Runtime:",
-          str(int((tot_time/3600)))+":"+str(int((tot_time%3600)/60))+":"
-          +str(int((tot_time%3600)%60)) )
+
+    print(f'\n** Total Elapsed Runtime: {int((tot_time/3600)):02d}:{int((tot_time%3600)/60):02d}:{int((tot_time%3600)%60):02d}')
+
+    print(f'\n** Or, if you are not running on a potato: {end_timeit - start_timeit:.3f}s\n')
     
 
 # Call to main function to run the program

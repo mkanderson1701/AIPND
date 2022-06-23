@@ -70,28 +70,42 @@ def adjust_results4_isadog(results_dic, dogfile):
     with open(dogfile, 'r') as file:
         dog_list = file.readlines()
     dog_list = list(map(lambda dog: dog.rstrip('\n'), dog_list))
-    # print(dog_list)
+
     for value in results_dic.values():
         image_match = False
         class_match = False
         for dog in dog_list:
-            if image_match is False and dog.find(value[0]) > -1:
+            if image_match is False and dog == value[0]:
+                # image label seems to be in dog list
                 value.insert(3, 1)
                 image_match = True
-            if class_match is False and value[1].find(dog) > -1:
+            if class_match is False and dog == value[1]:
+                # classification appears to be in dog list
                 value.insert(4, 1)
                 class_match = True
             if image_match is True and class_match is True:
+                # both were matched, can move on
                 break
         if not image_match:
+            # image label was not in dog list
             value.insert(3, 0)
         if not class_match:
+            # classification was not in dog list
             value.insert(4, 0)
-        
+
 
 if __name__ == '__main__':
-    results_dic = {'Basenji_00963.jpg': ['basenji'],
-                'Basenji_00974.jpg': ['basenji'],
-                'Basset_hound_01034.jpg': ['basset hound']
-                }
+    results_dic = {'Basenji_00963.jpg': ['basenji', 'basenji', 1],
+                   'Basenji_00974.jpg': ['basenji', 'basenji', 1],
+                   'Basset_hound_01034.jpg':
+                   ['basset hound', 'basset, basset hound', 1],
+                   'fox_squirrel_01.jpg':
+                   ['fox squirrel',
+                    'fox squirrel, eastern fox squirrel, sciurus niger', 1],
+                   'gecko_80.jpg':
+                   ['gecko',
+                    'tailed frog, bell toad, ribbed toad, tailed toad,' +
+                    ' ascaphus trui', 0]
+                   }
     adjust_results4_isadog(results_dic, 'dognames.txt')
+    print(f'results dic: {results_dic}')

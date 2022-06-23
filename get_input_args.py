@@ -45,7 +45,7 @@ def get_input_args():
                         choices=['vgg', 'resnet', 'alexnet'],
                         help='CNN model architecture',
                         required=False)
-    parser.add_argument('--dogfile', type=str, default='dognames', 
+    parser.add_argument('--dogfile', type=str, default='dognames.txt', 
                         help='dognames file', required=False)
 
     args = parser.parse_args()

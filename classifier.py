@@ -15,6 +15,7 @@ models = {'resnet': resnet18, 'alexnet': alexnet, 'vgg': vgg16}
 with open('imagenet1000_clsid_to_human.txt') as imagenet_classes_file:
     imagenet_classes_dict = ast.literal_eval(imagenet_classes_file.read())
 
+
 def classifier(img_path, model_name):
     # load the image
     img_pil = Image.open(img_path)
@@ -49,7 +50,7 @@ def classifier(img_path, model_name):
     else:
         # apply model to input
         # wrap input in variable
-        data = Variable(img_tensor, volatile = True) 
+        data = Variable(img_tensor, volatile=True)
 
     # apply model to input
     model = models[model_name]
@@ -57,7 +58,7 @@ def classifier(img_path, model_name):
     # puts model in evaluation mode
     # instead of (default)training mode
     model = model.eval()
-    
+
     # apply data to model - adjusted based upon version to account for 
     # operating on a Tensor for version 0.4 & higher.
     if int(pytorch_ver[0]) > 0 or int(pytorch_ver[1]) >= 4:
