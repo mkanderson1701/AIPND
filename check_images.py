@@ -1,16 +1,17 @@
 """
-UDACITY AIPND PROJECT
+UDACITY AIPND PROJECT.
 
 PROGRAMMER/STUDENT: Mike Anderson
 DATE CREATED: 2022-06-22
-REVISED DATE:
+REVISED DATE: 2022-06-23
 PURPOSE: Classifies pet images using a pretrained CNN model, compares these
          classifications to the true identity of the pets in the images, and
-         summarizes how well the CNN performed on the image classification task. 
-         Note that the true identity of the pet (or object) in the image is 
+         summarizes how well the CNN performed on the image
+         classification task.
+         Note that the true identity of the pet (or object) in the image is
          indicated by the filename of the image. Therefore, your program must
          first extract the pet image label from the filename before
-         classifying the images using the pretrained CNN model. With this 
+         classifying the images using the pretrained CNN model. With this
          program we will be comparing the performance of 3 different CNN model
          architectures to determine which provides the 'best' classification.
 
@@ -18,7 +19,8 @@ Use argparse Expected Call with <> indicating expected user input:
     python check_images.py --dir <directory with images> --arch <model>
             --dogfile <file that contains dognames>
   Example call:
-    python check_images_solution.py --dir pet_images/ --arch vgg --dogfile dognames.txt
+    python check_images_solution.py --dir pet_images/ --arch vgg
+        --dogfile dognames.txt
 """
 
 # Imports python modules
@@ -38,66 +40,44 @@ from timeit import default_timer as timer
 
 
 def main():
-    # Measures total program runtime by collecting start time
+    """Run classification, recognition and create stats."""
     start_time = time()
     start_timeit = timer()
 
     # command line parser
     in_arg = get_input_args()
-
-    # Function that checks command line arguments using in_arg  
     check_command_line_arguments(in_arg)
 
+    # Create labels based on file names
     results_dic = get_pet_labels(in_arg.dir)
-
-    # Function that checks Pet Images in the results Dictionary using results    
     check_creating_pet_image_labels(results_dic)
 
     # Run classication
     classify_images(in_arg.dir, results_dic, in_arg.arch)
-
-    # Function that checks Results Dictionary using results
     check_classifying_images(results_dic)
 
     # Update dict with additional flags for is/is not dog
     adjust_results4_isadog(results_dic, in_arg.dogfile)
-    # print(results_dic)
-
-    # Function that checks Results Dictionary for is-a-dog adjustment using results
     check_classifying_labels_as_dogs(results_dic)
 
-    # TODO 5: Define calculates_results_stats function within the file calculates_results_stats.py
-    # This function creates the results statistics dictionary that contains a
-    # summary of the results statistics (this includes counts & percentages). This
-    # dictionary is returned from the function call as the variable results_stats    
-    # Calculates results of run and puts statistics in the Results Statistics
-    # Dictionary - called results_stats
+    # Create stats dictionary
     results_stats = calculates_results_stats(results_dic)
-
-    # Function that checks Results Statistics Dictionary using results_stats
     check_calculating_results(results_dic, results_stats)
 
-
-    # TODO 6: Define print_results function within the file print_results.py
-    # Once the print_results function has been defined replace 'None' 
-    # in the function call with in_arg.arch  Once you have done the 
-    # replacements your function call should look like this: 
-    #      print_results(results, results_stats, in_arg.arch, True, True)
-    # Prints summary results, incorrect classifications of dogs (if requested)
-    # and incorrectly classified breeds (if requested)
+    # Output some stats and results to console
     print_results(results_dic, results_stats, in_arg.arch, True, True)
-    
-    # TODO 0: Measure total program runtime by collecting end time
+
     end_timeit = timer()
     end_time = time()
-    
-    # TODO 0: Computes overall runtime in seconds & prints it in hh:mm:ss format
+
     tot_time = end_time - start_time
 
-    print(f'\n** Total Elapsed Runtime: {int((tot_time/3600)):02d}:{int((tot_time%3600)/60):02d}:{int((tot_time%3600)%60):02d}')
+    print(f'\n** Total Elapsed Runtime: {int((tot_time/3600)):02d}' +
+          f':{int((tot_time%3600)/60):02d}:{int((tot_time%3600)%60):02d}')
 
-    print(f'\n** Or, if you are not running on a potato: {end_timeit - start_timeit:.3f}s\n')
-    
+    print(f'** Or, if you are not running on a potato: ' +
+          f'{end_timeit - start_timeit:.3f}s\n')
+
 
 # Call to main function to run the program
 if __name__ == "__main__":

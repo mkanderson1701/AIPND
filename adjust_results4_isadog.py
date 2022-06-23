@@ -1,9 +1,9 @@
 """
-adjust_results4_isadog.py
+Adjust the results dictionary.
 
 PROGRAMMER: Mike Anderson
 DATE CREATED: 2022-06-22
-REVISED DATE: 2022-06-22
+REVISED DATE: 2022-06-23
 PURPOSE: Create a function adjust_results4_isadog that adjusts the results
          dictionary to indicate whether or not the pet image label is of-a-dog,
          and to indicate whether or not the classifier image label is of-a-dog.
@@ -19,7 +19,8 @@ PURPOSE: Create a function adjust_results4_isadog that adjusts the results
         This function inputs:
            -The results dictionary as results_dic within adjust_results4_isadog
             function and results for the function call within main.
-           -The text file with dog names as dogfile within adjust_results4_isadog
+           -The text file with dog names as dogfile within
+            adjust_results4_isadog
             function and in_arg.dogfile for the function call within main.
           This function uses the extend function to add items to the list
           that's the 'value' of the results dictionary. You will be adding the
@@ -30,15 +31,11 @@ PURPOSE: Create a function adjust_results4_isadog that adjusts the results
           label isn't a dog.
 """
 
-# TODO 4: Define adjust_results4_isadog function below, specifically replace the None
-#       below by the function definition of the adjust_results4_isadog function. 
-#       Notice that this function doesn't return anything because the 
-#       results_dic dictionary that is passed into the function is a mutable 
-#       data type so no return is needed.
-
 
 def adjust_results4_isadog(results_dic, dogfile):
     """
+    Adjust the results disctionary.
+
     Adjusts the results dictionary to determine if classifier correctly
     classified images 'as a dog' or 'not a dog' especially when not a match.
     Demonstrates if model architecture correctly classifies dog images even if
@@ -53,14 +50,16 @@ def adjust_results4_isadog(results_dic, dogfile):
                 ------ where index 3 & index 4 are added by this function -----
                  NEW - index 3 = 1/0 (int)  where 1 = pet image 'is-a' dog and
                             0 = pet Image 'is-NOT-a' dog.
-                 NEW - index 4 = 1/0 (int)  where 1 = Classifier classifies image
+                 NEW - index 4 = 1/0 (int)  where 1 = Classifier classifies
+                 image
                             'as-a' dog and 0 = Classifier classifies image
                             'as-NOT-a' dog.
      dogfile - A text file that contains names of all dogs from the classifier
                function and dog names from the pet image files. This file has
                one dog name per line dog names are all in lowercase with
                spaces separating the distinct words of the dog name. Dog names
-               from the classifier function can be a string of dog names separated
+               from the classifier function can be a string of dog names
+               separated
                by commas when a particular breed of dog has multiple dog names
                associated with that breed (ex. maltese dog, maltese terrier,
                maltese) (string - indicates text file's filename)

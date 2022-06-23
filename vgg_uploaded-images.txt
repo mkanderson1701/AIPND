@@ -1,0 +1,89 @@
+Command Line Arguments:
+     dir = uploaded_images/ 
+    arch = vgg 
+ dogfile = dognames.txt
+
+Pet Image Label Dictionary has 4 key-value pairs.
+Below are 4 of them:
+ 1 key:                     dog_01.jpg  label:                        dog
+ 2 key:                     dog_02.jpg  label:                        dog
+ 3 key:              fake_poop_33.jpeg  label:                  fake poop
+ 4 key:               grey_wolf_99.jpg  label:                  grey wolf
+
+     MATCH:
+
+              grey_wolf_99.jpg: 
+Real:                  grey wolf   Classifier: timber wolf, grey wolf, gray wolf, canis lupus
+
+ NOT A MATCH:
+
+                    dog_01.jpg: 
+Real:                        dog   Classifier:                  border collie
+
+                    dog_02.jpg: 
+Real:                        dog   Classifier:                  border collie
+
+             fake_poop_33.jpeg: 
+Real:                  fake poop   Classifier:                        pretzel
+
+# Total Images 4 # Matches: 1 # NOT Matches: 3
+
+     MATCH:
+
+              grey_wolf_99.jpg: 
+Real:                  grey wolf   Classifier: timber wolf, grey wolf, gray wolf, canis lupus  
+PetLabelDog: 0  ClassLabelDog: 0
+
+ NOT A MATCH:
+
+                    dog_01.jpg: 
+Real:                        dog   Classifier:                  border collie  
+PetLabelDog: 1  ClassLabelDog: 1
+
+                    dog_02.jpg: 
+Real:                        dog   Classifier:                  border collie  
+PetLabelDog: 1  ClassLabelDog: 1
+
+             fake_poop_33.jpeg: 
+Real:                  fake poop   Classifier:                        pretzel  
+PetLabelDog: 0  ClassLabelDog: 0
+
+# Total Images 4 # Matches: 1 # NOT Matches: 3
+
+ ** Statistics from calculates_results_stats() function:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed:   0.0
+
+ ** Check Statistics - calculated from this function as a check:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed:   0.0
+
+Summary Results
+
+---
+CNN architecture in use: vgg
+---
+
+IMAGE COUNTS
+------------
+Number of Images:  4
+Number of dog images:  2
+Number not-dog images:  2
+
+PERCENTAGES
+-----------
+Percentage of dog pictures classified correctly as a dog: 100.0%
+Percentage of dog pictures with correctly identified breed:   0.0%
+Percentage of non-dogs correct classified: 100.0%
+Percentage of correct classifications, all pictures:  25.0%
+
+MISCLASSIFIED BREEDS
+------------------
+LABEL                         CLASSIFIER
+dog                           border collie
+dog                           border collie
+
+** Total Elapsed Runtime: 00:00:00
+
+** Or, if you are not running on a potato: 0.517s
+
